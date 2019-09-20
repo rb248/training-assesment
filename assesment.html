@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap Example</title>
+          <link href="./CustomStyles.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"> 
+   	</script> 
+   		<script type="text/javascript">
+	    	function valid(	) {  
+	    		
+	    		var x=document.getElementById('pass').value; 
+	    		var y=document.getElementById('pass1').value; 
+	    		if(x!==y){
+	    			alert('password do not match');
+	    			// body...
+	    		} 
+	    		var Typedd =document.getElementById('type');
+				var selectedIdx= Typedd.selectedIndex; 
+				var Datadd =document.getElementById('data'); 
+ 				Datadd.innerText=null; 
+
+	    		}	
+	    		function fillData() {
+	    			// body... 
+	    			data=[['COMPUTER SCIENCE','ELECTRONICS','ELECTRICAL'],['ARTIFICIAL INTELLIGENCE','ROBOTICS'] ]; 
+	    			var Typedd =document.getElementById('type');
+					var selectedIdx= Typedd.selectedIndex; 
+					var Datadd =document.getElementById('dd'); 
+ 					Datadd.innerText=null; 
+ 					var ele=document.createElement('option');
+					ele.text="select";
+					Datadd.add(ele,0); 
+					for(i=0;i<data[selectedIdx-1].length;i++)
+					{
+					var ele=document.createElement('option');
+					ele.text=data[selectedIdx-1][i];
+					Datadd.add(ele,i+1);
+
+					}
+
+	    		} 
+
+	    		function dobValidate() {
+
+			var date= new Date();
+
+			var year=date.getFullYear()-18;
+			var month=date.getMonth()+1;
+			var dd=date.getDate();
+
+			if(month<10)
+			{
+				month='0'+month;
+			}
+			if(dd<10)
+			{
+				dd=0+""+dd;
+			}
+
+document.getElementById('dob').max=year+"-"+month+"-"+dd;
+
+}
+
+    </script> 
+    
+    	
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+                
+                    <img src="Images/img6.jpeg" id='banner' class="img-responsive img-circle" align="center" /> 
+                    <div class="centered"><h1>XYZ LIMITED</h1></div>
+
+ 
+<br> 
+<br>
+<form >
+ <fieldset class="f1">
+  <legend>Personalia:</legend>
+   <input type="text" placeholder="username"><br> 
+   <br>
+  <input id='pass' type="password" placeholder="password"><br>  
+  <br>
+  <input id='pass1' type="password" placeholder="confirm password"><br> 
+  <br>
+  
+  <br> 
+ 	<select id='type' onchange="fillData()"> 
+ 		<option>select degree</option>
+ 		<option>Graduation</option> 
+ 		<option>Post Graduation</option>
+ 	</select> 
+
+ 	<br> <br>
+ 	<select id='dd'>
+ 		<option>select</option>
+ 	</select> 
+<br> 
+<input type="date" id="dob" onclick="dobValidate()"> 
+<br> 
+<input type="submit" value="ok" class='valid' onclick="valid()"> 
+
+ </fieldset>
+</form>                
