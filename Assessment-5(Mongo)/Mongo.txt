@@ -1,0 +1,392 @@
+db.createCollection("doctors")
+
+db.dotors.drop()
+
+db.doctors.insert(
+{
+"name":"dean",
+"born":"2000"
+}
+)
+
+db.doctors.find()
+
+db.doctors.find().pretty()
+
+
+db.doctors.insert(
+{
+"name":"dean",
+"born":"2010",
+"speciality":"ortho"
+}
+)
+
+
+db.doctors.find().pretty()
+
+db.doctors.insert(
+{
+"name":"bean",
+"born":"2003",
+"speciality":"ortho",
+"phone":["998877","221144"]
+}
+)
+
+db.doctors.find().pretty()
+
+db.doctors.find(
+{"born": "2000"}
+).pretty()
+
+
+
+db.doctors.find(
+{"speciality": "ortho"}
+).pretty()
+
+
+select * from doctors where born > 2000
+
+db.doctors.find(
+{"born": {$gt :"2000"}}
+).pretty()
+
+
+
+
+db.doctors.find(
+{"born": {$lt :"2010"}}
+).pretty()
+
+db.doctors.find(
+{"born": {$lte :"2010"}}
+).pretty()
+
+
+
+db.doctors.find({born:{$ne:"2010"} }).pretty();
+
+
+db.doctors.find({born:{$nin:["2010","2000","2003"]} }).pretty();
+
+db.doctors.find({born:{$nin:["2000","2003"]} }).pretty();
+
+
+select * from doctors where name='bean' and born='2003'
+
+db.doctors.find(
+{
+born:"2003",
+name:"bean"
+}
+);
+
+select * from doctors where name='bean' or born='2010'
+
+db.doctors.find(
+{$or:[{born:"2010"},
+{"name":"bean"}]}
+).pretty();
+
+
+
+db.doctors.update(
+{ name:"bean"} ,
+ {$set:{name:"bean new"}}
+)
+
+db.doctor.find().pretty()
+
+
+db.doctors.update(
+{ name:"dean"} ,
+ {$set:{name:"dean new"}}
+)
+
+db.doctors.find().pretty()
+
+
+db.doctors.update(
+{ name:"dean"} ,
+ {$set:{name:"dean name"}}
+)
+
+
+
+db.doctors.find().pretty()
+
+
+db.doctors.update(
+{ name:"dean name"} ,
+ {$set:{name:"dean"}}
+)
+
+db.doctors.update(
+{ name:"dean"} ,
+ {$set:{name:"dean name"}},
+{multi:true}
+)
+
+
+
+
+db.doctors.find().pretty()
+
+
+
+db.doctors.update(
+{name:"bean new", } ,
+ {$set:{name:"bean",bron:"2002"}}
+)
+
+db.doctors.find().pretty()
+
+db.doctors.update(
+{name:"bean", } ,
+ {$unset:{bron:"2002"}}
+)
+
+
+
+db.doctors.find().pretty()
+
+
+db.doctors.update(
+{name:"bean", } ,
+ {$set:{name:"bean",born:"2002"}}
+)
+
+
+db.doctors.update(
+{name:"dean new", } ,
+ {$set:{name:"dean"}}
+)
+
+db.doctors.find().pretty()
+
+
+db.doctors.remove(
+{ name:"dean name"}
+)
+
+
+db.doctors.find().pretty()
+
+
+
+db.doctors.insert(
+[
+{name:"bean new"},
+{name:"bean new"}
+]
+)
+
+
+db.doctors.remove(
+{ name:"bean new"} ,1)
+
+
+db.doctors.find().pretty()
+
+
+db.doctors.remove(
+{ name:"bean"} ,1)
+
+
+db.doctors.remove(
+{ }
+)
+
+
+db.doctors.insert(
+[
+{
+        "name" : "bean",
+        "doc_id" :1,
+         "born":2000,        
+        "age" : 19
+},
+{
+        "name" : "dean",
+         "doc_id" :3,
+         "born":1999,        
+        "age" : 20
+},
+{
+        "name" : "mean",
+          "doc_id" :4,
+         "born":1998,        
+        "age" : 21
+}
+]
+)
+
+
+
+db.doctors.find({"doc_id":1}).pretty()
+
+select doc_id from doctors()
+
+db.doctors.find({},{"doc_id":1}).pretty()
+
+
+select doc_id from doctors()
+
+db.doctors.find({},{_id:0,"doc_id":1}).pretty()
+
+
+db.doctors..find().pretty()
+
+db.doctors.findOne();
+
+
+select top 2 from doctors;
+
+db.doctors.find().limit(2).pretty();
+
+
+db.doctors.find().skip(2).pretty();
+
+
+
+db.doctors.find().sort({doc_id:1}).pretty();
+
+
+db.doctors.find().sort({doc_id:-1}).pretty();
+
+
+db.doctors.find().count();
+
+
+db.doctors.insert(
+{
+"name":"bean1",
+"born":"2010",
+"speciality":"ortho",
+"phone":["998877","221144"],
+"address":[
+  {
+"state":"kar",
+"city":"bij"
+},
+{
+"state":"maha",
+"city":"mum"
+}
+]
+}
+)
+
+
+db.studs.insert(
+[
+{
+rno:1,
+sname:'raj',
+gender:'male',
+sem:5,
+marks:90
+},
+
+{
+rno:2,
+sname:'raja',
+gender:'male',
+sem:5,
+marks:80
+},
+
+{
+rno:3,
+sname:'rajni',
+gender:'female',
+sem:7,
+marks:77
+},
+{
+rno:4,
+sname:'rajeshwari',
+gender:'female',
+sem:1,
+marks:88
+},
+{
+rno:4,
+sname:'rajeshwari',
+gender:'female',
+sem:1,
+marks:88
+},
+{
+rno:5,
+sname:'raja',
+gender:'male',
+sem:1,
+marks:70
+}
+]
+)
+
+
+db.studs.find().pretty()
+
+
+db.studs.aggregate( [ { $group : { _id : "$gender" } } ] )
+
+
+db.studs.aggregate(
+{
+$group : { _id : "$gender",
+tot:{$sum:1}
+}
+});
+
+
+db.studs.aggregate(
+{
+$group : { _id : "$gender",
+tot:{$sum:"$marks"}
+}
+});
+
+
+
+db.studs.aggregate(
+{
+$group : { _id : "$gender",
+avgOfStud:{$avg:"$marks"}
+}
+});
+
+
+
+db.studs.aggregate(
+{
+$group : { _id : "$gender",
+highest:{$max:"$marks"}
+}
+});
+
+
+
+group by gender
+having max(marks) >=90
+
+db.studs.aggregate(
+[
+{
+$group :
+{
+_id : "$gender",
+highest:{$max:"$marks"}
+}
+},
+{
+$match: { "highest": { $gte: 90}}
+}
+]
+);
+
+

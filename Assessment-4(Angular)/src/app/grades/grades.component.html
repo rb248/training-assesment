@@ -1,0 +1,11 @@
+
+<div *ngIf="mark">
+  <div [ngSwitch]=true>
+      <p *ngSwitchCase="mark>89" style="color:green"> Grade A+ </p>
+      <p *ngSwitchCase="mark>79 && mark&lt;90" style="background-color:greenyellow"> Grade A </p>
+      <p *ngSwitchCase="mark>69 && mark&lt;80" style="background-color: lightgreen"> Grade B </p>
+      <p *ngSwitchCase="mark>59 && mark&lt;70" style="background-color: yellow"> Grade C </p>
+      <p *ngSwitchCase="mark>50 && mark&lt;60" style="background-color: orange"> Grade D </p>
+      <p *ngSwitchDefault style="color:red">FAIL</p>
+  </div>
+</div>

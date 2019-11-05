@@ -1,0 +1,12 @@
+<div>
+  Player name: <p>{{ player.playerName }}</p>
+  <br>
+  Club: <p>{{ player.club }}</p>
+  <br>
+
+  <div *ngFor="let pos of player.position, let i=index">
+    Position {{ i+1 }}: {{ pos }}
+  </div>
+  <br>
+  Jersey Number: <p>{{ player.jerseyno }}</p>
+</div>
